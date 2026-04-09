@@ -1,0 +1,150 @@
+:root {
+  --text: #4b5563;
+  --text-h: #111827;
+  --bg: #fff7ed;
+  --border: #e5e4e7;
+  --code-bg: rgba(255, 255, 255, 0.7);
+  --accent: #f59e0b;
+  --accent-bg: rgba(245, 158, 11, 0.14);
+  --accent-border: rgba(245, 158, 11, 0.45);
+  --social-bg: rgba(255, 255, 255, 0.55);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --heading: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+/* Force a light theme (orange). */
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(900px 600px at 20% 0%, rgba(251, 146, 60, 0.25), transparent 55%),
+    radial-gradient(900px 600px at 85% 15%, rgba(245, 158, 11, 0.22), transparent 60%),
+    radial-gradient(1000px 700px at 50% 110%, rgba(236, 72, 153, 0.12), transparent 60%),
+    linear-gradient(180deg, #fff7ed 0%, #fffbeb 55%, #fff7ed 100%);
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  text-align: start;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+/* Scroll reveal — dùng với components/Reveal.jsx */
+.reveal-base {
+  opacity: 0;
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal-base.reveal-base--visible {
+  opacity: 1;
+}
+
+.reveal-v-fade-up {
+  transform: translate3d(0, 40px, 0) scale(0.98);
+}
+
+.reveal-v-fade-up.reveal-base--visible {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.reveal-v-fade {
+  transform: none;
+}
+
+.reveal-v-slide-left {
+  transform: translate3d(-32px, 0, 0);
+}
+
+.reveal-v-slide-left.reveal-base--visible {
+  transform: translate3d(0, 0, 0);
+}
+
+.reveal-v-zoom {
+  transform: scale(0.94);
+}
+
+.reveal-v-zoom.reveal-base--visible {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-base {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    filter: none !important;
+  }
+}
