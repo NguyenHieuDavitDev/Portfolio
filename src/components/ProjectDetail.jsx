@@ -53,6 +53,7 @@ export default function ProjectDetail() {
   const gallery = media?.gallery ?? [];
   const allStockShots = gallery.length > 0 && gallery.every((g) => g.stock);
   const allScreenshots = gallery.length > 0 && gallery.every((g) => !g.stock);
+  const mediaAttr = media?.mediaAttribution;
   const overviewParts =
     detail.overviewParagraphs ??
     (detail.overview ? [detail.overview] : []);
@@ -349,7 +350,34 @@ export default function ProjectDetail() {
                     </div>
                   ))}
                 </div>
-                {allStockShots ? (
+                {mediaAttr === "repo-assets" ? (
+                  <p className="small text-secondary mt-3 mb-0 opacity-75">
+                    <i className="fa-solid fa-circle-info me-1" aria-hidden />
+                    Ảnh banner và sản phẩm lấy từ thư mục <code className="small">media/</code> trong{" "}
+                    <a
+                      href={githubUrl ?? project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link-dark link-underline-opacity-50"
+                    >
+                      repository GitHub
+                    </a>{" "}
+                    của dự án (không dùng ảnh stock ngoài).
+                  </p>
+                ) : mediaAttr === "placeholder" ? (
+                  <p className="small text-secondary mt-3 mb-0 opacity-75">
+                    <i className="fa-solid fa-circle-info me-1" aria-hidden />
+                    Đang dùng khung placeholder SVG — hãy chụp màn hình từ <code className="small">frontend</code>{" "}
+                    (<code className="small">npm run dev</code>) và thay file trong{" "}
+                    <code className="small">src/assets/projects/ico-startup-fund/</code>, rồi cập nhật import trong{" "}
+                    <code className="small">projectGallery.js</code>.
+                  </p>
+                ) : mediaAttr === "screenshots" || allScreenshots ? (
+                  <p className="small text-secondary mt-3 mb-0 opacity-75">
+                    <i className="fa-solid fa-circle-info me-1" aria-hidden />
+                    Ảnh chụp màn hình từ giao diện hệ thống thật.
+                  </p>
+                ) : allStockShots ? (
                   <p className="small text-secondary mt-3 mb-0 opacity-75">
                     <i className="fa-solid fa-circle-info me-1" aria-hidden />
                     Ảnh minh họa chủ đề dự án từ{" "}
@@ -362,11 +390,6 @@ export default function ProjectDetail() {
                       Unsplash
                     </a>{" "}
                     (giấy phép Unsplash).
-                  </p>
-                ) : allScreenshots ? (
-                  <p className="small text-secondary mt-3 mb-0 opacity-75">
-                    <i className="fa-solid fa-circle-info me-1" aria-hidden />
-                    Ảnh chụp màn hình từ giao diện hệ thống thật.
                   </p>
                 ) : null}
               </section>
